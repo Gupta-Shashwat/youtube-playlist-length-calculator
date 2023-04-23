@@ -25,7 +25,6 @@ const lengthCalculator = async (playlist_id) => {
     const URL2 = `https://www.googleapis.com/youtube/v3/videos?&part=contentDetails&key=${yt_api}&id=`;
     let next_page = '';
     let cnt = 0;
-    let totalSeconds = 0;
 
     async function getVideoDuration(videoId) {
         const response = await axios.get(`${URL2}${videoId}`);
@@ -59,13 +58,16 @@ const lengthCalculator = async (playlist_id) => {
             const hours = Math.floor(totalSeconds / 3600);
             const minutes = Math.floor((totalSeconds % 3600) / 60);
             const seconds = totalSeconds % 60;
-            const format = `No of videos : ${cnt}
-Total length of playlist : ${hours}h ${minutes}m ${seconds}s
-At 1.25x : ${Math.floor(totalSeconds / 1.25 / 3600)}h ${Math.floor((totalSeconds / 1.25 % 3600) / 60)}m ${Math.floor(totalSeconds / 1.25 % 60)}s
-At 1.50x : ${Math.floor(totalSeconds / 1.5 / 3600)}h ${Math.floor((totalSeconds / 1.5 % 3600) / 60)}m ${Math.floor(totalSeconds / 1.5 % 60)}s
-At 1.75x : ${Math.floor(totalSeconds / 1.75 / 3600)}h ${Math.floor((totalSeconds / 1.75 % 3600) / 60)}m ${Math.floor(totalSeconds / 1.75 % 60)}s
-At 2.00x : ${Math.floor(totalSeconds / 2 / 3600)}h ${Math.floor((totalSeconds / 2 % 3600) / 60)}m ${Math.floor(totalSeconds / 2 % 60)}s`;
-            return format;
+            const playlistLength = {
+                "No_of_videos": cnt,
+                "total_length_in_seconds": totalSeconds,
+                "length": {
+                    "seconds": seconds,
+                    "minutes": minutes,
+                    "hours": hours
+                }
+            }
+            return playlistLength;
         }
     }
 }
