@@ -24,7 +24,7 @@ const createPlaylistSummary = (length) => {
 
     const totalDuration = createSummaryItem(
         "Total Duration : ",
-        `${length.length.hours}:${length.length.minutes}:${length.length.seconds}`,
+        speedUp(length.total_length_in_seconds, 1),
         "#86EFAC"
     );
     summaryContainer.appendChild(totalDuration);
@@ -104,12 +104,22 @@ const fetchID = () => {
 }
 
 // returns playlist duration if watched with the given speed
-const speedUp = (seconds, speed) => {
-    const totalSeconds = seconds / speed;
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const remainingSeconds = Math.floor(totalSeconds % 60);
-    return `${hours}:${minutes}:${remainingSeconds}`;
+const speedUp = (sec, speed) => {
+    const totalSeconds = sec / speed;
+    let hours = Math.floor(totalSeconds / 3600);
+    let minutes = Math.floor((totalSeconds % 3600) / 60);
+    if (minutes > 9) {
+        minutes = `${minutes}`;
+    } else {
+        minutes = `0${minutes}`;
+    }
+    let seconds = Math.floor(totalSeconds % 60);
+    if (seconds > 9) {
+        seconds = `${seconds}`;
+    } else {
+        seconds = `0${seconds}`;
+    }
+    return `${hours}:${minutes}:${seconds}`;
 }
 
 // lengthCalculator is the API part which is temporarily added to the extension's code.
