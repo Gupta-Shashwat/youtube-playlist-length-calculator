@@ -28,8 +28,9 @@ const lengthCalculator = async (playlist_id) => {
     let totalSeconds = 0;
 
     async function getVideoDuration(videoId) {
-        const response = await axios.get(`${URL2}${videoId}`);
-        const duration = response.data.items[0].contentDetails.duration;
+        const response = await fetch(`${URL2}${videoId}`);
+        const data = await response.json();
+        const duration = data.items[0].contentDetails.duration;
         const timeArray = duration.match(/(\d+)(?=[MHS])/g);
         const seconds = parseInt(timeArray.pop() || '0');
         const minutes = parseInt(timeArray.pop() || '0');
@@ -41,8 +42,8 @@ const lengthCalculator = async (playlist_id) => {
 
     while (true) {
         const vidList = [];
-        const response = await axios.get(URL1 + next_page);
-        const results = response.data;
+        const response = await fetch(URL1 + next_page);
+        const results = await response.json();
 
         for (const x of results.items) {
             vidList.push(x.contentDetails.videoId);
