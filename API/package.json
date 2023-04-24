@@ -1,14 +1,14 @@
 {
   "name": "youtube-playlist-length-calculator",
   "version": "1.0.0",
-  "description": "",
+  "description": "A web API based on node.js which calculates the length of a youtube playlist.",
   "main": "lengthCalculator.js",
   "type": "module",
   "scripts": {
     "start": "nodemon lengthCalculator.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Gupta-Shashwat",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.3",
