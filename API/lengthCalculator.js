@@ -25,6 +25,7 @@ const lengthCalculator = async (playlist_id) => {
     const URL2 = `https://www.googleapis.com/youtube/v3/videos?&part=contentDetails&key=${yt_api}&id=`;
     let next_page = '';
     let cnt = 0;
+    let totalSeconds = 0;
 
     async function getVideoDuration(videoId) {
         const response = await axios.get(`${URL2}${videoId}`);
@@ -34,6 +35,7 @@ const lengthCalculator = async (playlist_id) => {
         const minutes = parseInt(timeArray.pop() || '0');
         const hours = parseInt(timeArray.pop() || '0');
         const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+        console.log()
         return totalSeconds;
     }
 
@@ -50,7 +52,7 @@ const lengthCalculator = async (playlist_id) => {
         cnt += vidList.length;
 
         const durations = await Promise.all(urlList.split(',').map(getVideoDuration));
-        const totalSeconds = durations.reduce((sum, seconds) => sum + seconds);
+        totalSeconds += durations.reduce((sum, seconds) => sum + seconds);
 
         if ('nextPageToken' in results) {
             next_page = results.nextPageToken;
