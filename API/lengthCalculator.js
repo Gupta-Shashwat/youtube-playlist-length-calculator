@@ -36,7 +36,6 @@ const lengthCalculator = async (playlist_id) => {
         const minutes = parseInt(timeArray.pop() || '0');
         const hours = parseInt(timeArray.pop() || '0');
         const totalSeconds = hours * 3600 + minutes * 60 + seconds;
-        console.log()
         return totalSeconds;
     }
 
