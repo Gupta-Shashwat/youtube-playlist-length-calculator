@@ -42,7 +42,7 @@ const lengthCalculator = async (playlist_id) => {
         const vidList = [];
         const response = await fetch(URL1 + next_page);
         const results = await response.json();
-
+        console.log(results.items);
         for (const x of results.items) {
             vidList.push(x.contentDetails.videoId);
         }
