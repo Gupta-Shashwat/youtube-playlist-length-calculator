@@ -136,13 +136,19 @@ const lengthCalculator = async (playlist_id) => {
     async function getVideoDuration(videoId) {
         const response = await fetch(`${URL2}${videoId}`);
         const data = await response.json();
-        const duration = data.items[0].contentDetails.duration;
-        const timeArray = duration.match(/(\d+)(?=[MHS])/g);
-        const seconds = parseInt(timeArray.pop() || '0');
-        const minutes = parseInt(timeArray.pop() || '0');
-        const hours = parseInt(timeArray.pop() || '0');
-        const totalSeconds = hours * 3600 + minutes * 60 + seconds;
-        return totalSeconds;
+        try {
+            const duration = data.items[0].contentDetails.duration;
+            const timeArray = duration.match(/(\d+)(?=[MHS])/g);
+            const seconds = parseInt(timeArray.pop() || '0');
+            const minutes = parseInt(timeArray.pop() || '0');
+            const hours = parseInt(timeArray.pop() || '0');
+            const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+            return totalSeconds;
+        } catch (e) {
+            console.log(`Unable to fetch duration of video ID = ${videoId}\nThis vedio's duration is excluded`);
+            console.log(`Data fetched about this video:\n${data}`);
+            return 0;
+        }
     }
 
 
