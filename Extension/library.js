@@ -22,6 +22,13 @@ const createPlaylistSummary = (length) => {
     );
     summaryContainer.appendChild(noOfVideos);
 
+    const avgLength = createSummaryItem(
+        "Average length of videos: ",
+        speedUp(length.total_length_in_seconds / length.No_of_videos, 1),
+        "#F4F4F4"
+    )
+    summaryContainer.appendChild(avgLength);
+
     const totalDuration = createSummaryItem(
         "Total Duration : ",
         speedUp(length.total_length_in_seconds, 1),
