@@ -1,8 +1,8 @@
 const displayPlaylistLength = async () => {
     const playlist_id = fetchID();
-    const length = await lengthCalculator(playlist_id);
-    // const length = await fetch(`https://localhost:5000/${playlist_id}`);
-    const summary = createPlaylistSummary(length);
+    const length = await fetch(`https://ytplaylist-length-calculator-api.onrender.com/${playlist_id}`);
+    const length_json = await length.json();
+    const summary = createPlaylistSummary(length_json);
     addSummaryToPage(summary);
 }
 

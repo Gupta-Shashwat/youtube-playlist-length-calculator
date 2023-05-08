@@ -20,6 +20,7 @@
         }
     ],
     "host_permissions": [
-        "https://www.youtube.com/playlist?list=*"
+        "https://www.youtube.com/playlist?list=*",
+        "https://ytplaylist-length-calculator-api.onrender.com/*"
     ]
 }
