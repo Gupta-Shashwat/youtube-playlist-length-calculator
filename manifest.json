@@ -17,6 +17,15 @@
                 "library.js",
                 "content.js"
             ]
+        },
+        {
+            "matches": [
+                "https://www.youtube.com/playlist?list=*"
+            ],
+            "run_at": "document_start",
+            "js": [
+                "fetch.js"
+            ]
         }
     ],
     "host_permissions": [

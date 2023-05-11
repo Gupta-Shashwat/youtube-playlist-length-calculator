@@ -1,9 +1,20 @@
-const displayPlaylistLength = async () => {
-    const playlist_id = fetchID();
-    const length = await fetch(`https://ytplaylist-length-calculator-api.onrender.com/${playlist_id}`);
-    const length_json = await length.json();
-    const summary = createPlaylistSummary(length_json);
-    addSummaryToPage(summary);
+const displayPlaylistLength = () => {
+
+    let loop = setInterval(() => {
+        try {
+            const summary = createPlaylistSummary(length_json);
+            addSummaryToPage(summary);
+            clearInterval(loop);
+            clearTimeout(loopLimit);
+        } catch (e) {
+            console.log("Summary not yet available. Retrying...");
+        }
+    }, 2000);
+
+    var loopLimit = setTimeout(() => {
+        clearInterval(loop);
+        console.log("Max no. of retries reached... Unable to fetch playlist data!!!");
+    }, 20000);
 }
 
 // Entry point
