@@ -103,13 +103,6 @@ const addSummaryToPage = (summary) => {
     metadataSection.parentNode.insertBefore(summary, metadataSection.nextSibling);
 }
 
-// fetches the ID of the youtube playlist
-const fetchID = () => {
-    const URL = window.location.href;
-    var playlistId = URL.match(/list=([A-Za-z0-9_-]+)/)[1];
-    return playlistId;
-}
-
 // returns playlist duration if watched with the given speed
 const speedUp = (sec, speed) => {
     const totalSeconds = sec / speed;
