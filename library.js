@@ -64,6 +64,30 @@ const createPlaylistSummary = (length) => {
     );
     summaryContainer.appendChild(x1_25);
 
+    const button = document.createElement('button');
+    button.textContent = "Select videos manually";
+    button.style.color = '#fff';
+    button.style.backgroundColor = 'rgba(0, 0, 255, 0.6)';
+    button.style.display = 'block';
+    button.style.width = '100%';
+    button.style.border = 'none';
+    button.style.borderRadius = '5px';
+    button.style.padding = '10px 20px';
+    button.style.borderRadius = '4px';
+    button.style.fontFamily = 'Arial, sans-serif';
+
+    button.addEventListener('mouseover', function () {
+        button.style.backgroundColor = '#555';
+    });
+
+    button.addEventListener('mouseout', function () {
+        button.style.backgroundColor = 'rgba(0, 0, 255, 0.6)';
+    });
+
+    button.addEventListener('click', showSelectionMenu);
+    summaryContainer.appendChild(button);
+
+
     return summaryContainer;
 }
 
@@ -89,6 +113,17 @@ const createSummaryItem = (label, value, valueColor = "#facc15") => {
 
     return container;
 };
+
+const showSelectionMenu = () => {
+    let videoContainers = document.querySelectorAll("#index-container.playlist-drag-handle.style-scope.ytd-playlist-video-renderer");
+    console.log(videoContainers);
+    videoContainers.forEach((element) => {
+        var checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+
+        element.insertBefore(checkbox, element.firstChild);
+    })
+}
 
 // adds the creates summary about the playlist length to the description secion of the playlist
 const addSummaryToPage = (summary) => {
