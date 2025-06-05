@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "Youtube playlist length calculator",
+    "description": "An extension which displays the length of a youtube playlist in it's description box",
+    "version": "0.1.0",
+    "action": {
+        "default_icon": "icon.png",
+        "default_title": "Playlist Length Calculator"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.youtube.com/playlist?list=*"
+            ],
+            "run_at": "document_end",
+            "js": [
+                "library.js",
+                "content.js"
+            ]
+        }
+    ],
+    "host_permissions": [
+        "https://www.youtube.com/playlist?list=*",
+        "https://ytplaylist-length-calculator-api.onrender.com/*"
+    ]
+}
